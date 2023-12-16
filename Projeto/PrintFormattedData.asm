@@ -5,8 +5,8 @@ PrintFormattedData:
     # $a0: Endereço do buffer
 
     # Inicializa o índice
-    li $t0, 0
-    move $s0, $a0
+    li $t0, 0    
+    la $s0, clientData #copia dados para o registrador
 
 print_loop:
     lb $t1, 0($s0)     # Carrega o byte do buffer

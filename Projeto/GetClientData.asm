@@ -1,11 +1,8 @@
-.data
-	#Atenção Se o mars.jar não estiver na mesma pasta que o arquivo txt é preciso inserir o caminho completo até chegar nele ex: C:/Users/_SEU-USUARIO_/Desktop/assembly-mars/texto.txt
-	localArquivo: .asciiz "ClientData.txt"
-	conteudo: .space 3200
-	
+#Atenção localArquivo e clienteData são alocados no main, execultar este código separadamente não vai funcioonar
 .text 
 .globl GetClientData
 GetClientData:
+
 	#Abrindo arquivo para modo leitura
 	li $v0,13 #Comando para solicitar abertura
 	la $a0, localArquivo #Armazena endereço do arquivo em $a0
@@ -16,7 +13,7 @@ GetClientData:
 	
 	move $a0, $s0 #copia descritor para ser usando em $a0, é obrigatório usar $a0
 	li $v0, 14 # ler o conteúdo do arquivo que é referenciado por $a0
-	la $a1, conteudo #buffer que armazena o conteúdo
+	la $a1, clientData #buffer que armazena o conteúdo
 	li $a2, 3200 # tamanho do buffer
 	syscall #leitura realizada
 

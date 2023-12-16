@@ -10,25 +10,29 @@
 	
 	jal PrintFormattedData #acessa clientData
 	
-	#jal SetClientData #acessa localArquivo(.txt) e salva os dados de clienData
-	
-	
-	
+	#jal SetClientData #acessa localArquivo(.txt) e salva os dados de clienData	
 end_program:
 li $v0, 10
 syscall
-
-
-
 
 .include "GetClientData.asm"
 .include "PrintFormattedData.asm"
 .include "CountCharacters.asm"
 .include "SetClientData.asm"
 
-#empilha o valor altual de #$ra
-#subi $sp, $sp, -4# necessário , pois quando uma função chama outra $ra é sobrescrito e perde o retorno
-#sw $ra, 0($sp) #-4 é apenas uma convenção, ei li em um fórum
-
-#lw $ra, 0($sp)
-#addi $sp, $sp, 4
+#COMANDOS
+#conta_cadastrar-<option1>-<option2>-<option3>
+#conta_format-<option1>
+#debito_extrato-<option1>
+#credito_extrato-<option1>
+#transferir_debito-<option1>-<option2>-<option3>
+#transferir_credito-<option1>-<option2>-<option3>
+#pagar_fatura-<option1>-<option2>-<option3>
+#sacar-<option1>-<option2>
+#depositar-<option1>-<option2>
+#alterar_limite-<option1>-<option2>
+#conta_fechar-<option1>
+#data_hora-<option1>-<option2>
+#salvar
+#recarregar
+#formatar

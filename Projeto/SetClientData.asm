@@ -1,5 +1,5 @@
 .data	
-	
+	localArquivo2: .asciiz "ClientData2.txt"		
 .text
 .globl SetClientData
 SetClientData:
@@ -9,7 +9,7 @@ SetClientData:
 	
 	#abri arquivo, se não existir ele cria um
 	li $v0, 13
-	la $a0, localArquivo
+	la $a0, localArquivo2
 	li $a1, 1 #1 significa modo de escrita, 0 é modo de leitura
 	syscall #descritor foi salvo em $v0
 	

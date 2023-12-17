@@ -1,0 +1,17 @@
+
+#COMANDOS
+#conta_cadastrar-<option1>-<option2>-<option3>
+#conta_format-<option1>
+#debito_extrato-<option1>
+#credito_extrato-<option1>
+#transferir_debito-<option1>-<option2>-<option3>
+#transferir_credito-<option1>-<option2>-<option3>
+#pagar_fatura-<option1>-<option2>-<option3>
+#sacar-<option1>-<option2>
+#depositar-<option1>-<option2>
+#alterar_limite-<option1>-<option2>
+#conta_fechar-<option1>
+#data_hora-<option1>-<option2>
+#salvar
+#recarregar
+#formatar

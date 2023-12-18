@@ -5,14 +5,14 @@
 	msg_sonho: .asciiz "Funciona!!"
 	
 	cmd_buffer: .space 32	
-	name_buffer: .space 34
-	cpf_buffer: .space 13
-	id_buffer: .space 8	
+	name_buffer: .space 64
+	cpf_buffer: .space 20
+	id_buffer: .space 20	
 	
 	data_buffer: .space 128
-	name_data: .space 34
-	cpf_data: .space 13
-	id_data: .space 8
+	name_data: .space 64
+	cpf_data: .space 20
+	id_data: .space 20
 		
 	cmd1: .asciiz "conta_cadastrar"
 	cmd2: .asciiz "conta_format"
@@ -150,15 +150,10 @@ command_not_found:
 
 formatar_salvar:
 	jal Formatar
-	j end_program  
+	j end_program 
+j main_loop 
 
-update_loop:
-	# Limpar o buffers
-	la $a0, buffer
-	li $a1, 32	
-	jal ClearBuffer
 
-j main_loop
 
  		      		
 end_program:
@@ -180,7 +175,47 @@ end_program:
 .include "tools/ClearClientData.asm"
 .include "tools/ClearBuffer.asm"
 
-
+update_loop:
+	# Limpar o buffers
+	la $a0, buffer
+	li $a1, 32	
+	jal ClearBuffer
+	
+	la $a0, cmd_buffer
+	li $a1, 32	
+	jal ClearBuffer
+	
+	la $a0, name_buffer
+	li $a1, 64	
+	jal ClearBuffer
+	
+	la $a0, cpf_buffer
+	li $a1, 20	
+	jal ClearBuffer
+	
+	
+	la $a0, id_buffer
+	li $a1, 20	
+	jal ClearBuffer
+	
+	la $a0, data_buffer
+	li $a1, 128	
+	jal ClearBuffer
+	
+	la $a0, name_data
+	li $a1, 64	
+	jal ClearBuffer
+	
+	la $a0, cpf_data
+	li $a1, 20	
+	jal ClearBuffer
+	
+	la $a0, id_data
+	li $a1, 20	
+	jal ClearBuffer
+j main_loop 
+	
+	
 imprime_teste:	# essa parte é apenas para testes	
 		li $v0, 4
 

@@ -76,7 +76,7 @@ sw $ra, 0($sp) #-4 é apenas uma convenção, eu li em um fórum
 	jal strcat
 	
 	la $a0, clientData
-	la $a1, cpf_data
+	la $a1, id_data
 	jal strcat
 	
 	la $a0, clientData

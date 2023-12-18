@@ -1,18 +1,17 @@
 .data
-	buffer: .space 32    # buffer para armazenar a string de entrada	
+	buffer: .space 128    # buffer para armazenar a string de entrada	
 	mensagem_invalido: .asciiz "Comando inválido"
 	
 	msg_sonho: .asciiz "Funciona!!"
 	
 	cmd_buffer: .space 32	
-	name_buffer: .space 64
-	cpf_buffer: .space 20
-	id_buffer: .space 20	
+	option_1: .space 32
+	option_2: .space 32
+	option_3: .space 32	
 	
 	data_buffer: .space 128
-	name_data: .space 64
-	cpf_data: .space 20
-	id_data: .space 20
+	salve_data_buffer: .space 128
+
 		
 	cmd1: .asciiz "conta_cadastrar"
 	cmd2: .asciiz "conta_format"
@@ -32,9 +31,9 @@
 	cmd16: .asciiz "sair"
 	cmd17: .asciiz "info"
 	
-	limite_credito_inicial: .asciiz "(1500)"
-	saldo_inicial: .asciiz "(0000)"
-	fatura_inicial: .asciiz "(0000)"
+	limite_credito_inicial: .asciiz "1500)"
+	saldo_inicial: .asciiz "0000)"
+	fatura_inicial: .asciiz "0000)"
 	
 	newline: .asciiz  "\n"
 	ponto_virgula: .asciiz ";"
@@ -47,25 +46,14 @@
 .text
 
 .main:	
-	#jal GetClientData
+	jal GetClientData
 	main_loop:	
-		#jal PrintFormattedData		
-	
-		#j end_program
-		# 1. Leitura da String de Entrada
-		li $v0, 8            # código da syscall para ler string
-		la $a0, buffer       # endereço do buffer
-		li $a1, 128          # comprimento máximo da string
-		syscall
-	
-		la $a0, buffer ## provavelmente NESTE(NESTE!!!) caso nem precise, pois $a0 ja aponta para buffer, mas assim fica mais fácil de entender
-		la $a1, cmd_buffer
+		
 		jal GetComand
-	
-		la $a0, cmd_buffer
+		jal GetOptionData
+		
 		jal SelectOptions
-
-		j command_not_found#só entra aqui se nenhuma opção for selecionada
+		j command_not_found
 	
 #opções
 	conta_cadastrar:
@@ -73,47 +61,47 @@
 		j update_loop
 				
 	conta_format:
-		j imprime_teste
+		
 		j update_loop
 		
 	debito_extrato:
-		j imprime_teste
+		
 		j update_loop
 		
         credito_extrato:
-        	j imprime_teste
+        	
         	j update_loop
         
         transferir_debito:
-        	j imprime_teste
+        	
         	j update_loop
         
         transferir_credito:
-       		j imprime_teste
+       		
         	j update_loop
         
         pagar_fatura:
-        	j imprime_teste
+        	
         	j update_loop
         
         sacar:
-        	j imprime_teste
+        	
         	j update_loop
         
         depositar:
-        	j imprime_teste
+        	
         	j update_loop
         
         alterar_limite:
-        	j imprime_teste
+        	
         	j update_loop
         
         conta_fechar:
-        	j imprime_teste
+        	
        		j update_loop
         
         data_hora:
-        	j imprime_teste
+        	
         	j update_loop
         
         salvar: #feito #precisa de alguns testes
@@ -130,13 +118,13 @@
         formatar: #feito    	
         	jal ClearClientData #apaga os dados do buffer clienteData, mas não muda o arquivo txt  	
         	j update_loop
-        
-        sair: #feito
-        	j end_program 
         	
        info:  #feito
        		jal Info
-       		j update_loop    	
+       		j update_loop 
+       		 
+       sair: #feito
+        	j end_program   	
           
         			
 command_not_found:
@@ -150,11 +138,39 @@ command_not_found:
 
 formatar_salvar:
 	jal Formatar
-	j end_program 
+	j update_loop
 j main_loop 
-
-
-
+ 
+update_loop:
+	# Limpar o buffers
+	la $a0, buffer
+	li $a1, 128	
+	jal ClearBuffer
+	
+	la $a0, cmd_buffer
+	li $a1, 32	
+	jal ClearBuffer
+	
+	la $a0, option_1
+	li $a1, 32	
+	jal ClearBuffer
+	
+	la $a0, option_2
+	li $a1, 32	
+	jal ClearBuffer
+	
+	la $a0, option_3
+	li $a1, 32	
+	jal ClearBuffer
+	
+	la $a0, data_buffer
+	li $a1, 128	
+	jal ClearBuffer
+	
+	la $a0, salve_data_buffer
+	li $a1, 128	
+	jal ClearBuffer
+j main_loop
  		      		
 end_program:
     # Finaliza o programa
@@ -163,7 +179,10 @@ end_program:
     
 .include "string/strcmp.asm"
 .include "string/strcat.asm"
+
 .include "functions/GetComand.asm"
+.include "functions/GetOptionData.asm"
+
 .include "functions/SelectOptions.asm"
 .include "functions/Cadastro.asm"
 .include "functions/Info.asm"
@@ -174,58 +193,3 @@ end_program:
 .include "tools/CountCharacters.asm"
 .include "tools/ClearClientData.asm"
 .include "tools/ClearBuffer.asm"
-
-update_loop:
-	# Limpar o buffers
-	la $a0, buffer
-	li $a1, 32	
-	jal ClearBuffer
-	
-	la $a0, cmd_buffer
-	li $a1, 32	
-	jal ClearBuffer
-	
-	la $a0, name_buffer
-	li $a1, 64	
-	jal ClearBuffer
-	
-	la $a0, cpf_buffer
-	li $a1, 20	
-	jal ClearBuffer
-	
-	
-	la $a0, id_buffer
-	li $a1, 20	
-	jal ClearBuffer
-	
-	la $a0, data_buffer
-	li $a1, 128	
-	jal ClearBuffer
-	
-	la $a0, name_data
-	li $a1, 64	
-	jal ClearBuffer
-	
-	la $a0, cpf_data
-	li $a1, 20	
-	jal ClearBuffer
-	
-	la $a0, id_data
-	li $a1, 20	
-	jal ClearBuffer
-j main_loop 
-	
-	
-imprime_teste:	# essa parte é apenas para testes	
-		li $v0, 4
-
-		la $a0, msg_sonho  
-		syscall	
-		        		
-        	la $a0, newline
-		syscall	
-		
-        	la $a0, cmd_buffer
-        	syscall 
-
-		j end_program

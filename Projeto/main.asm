@@ -183,6 +183,7 @@ end_program:
 .include "functions/GetComand.asm"
 .include "functions/GetOptionData.asm"
 
+
 .include "functions/SelectOptions.asm"
 .include "functions/Cadastro.asm"
 .include "functions/Info.asm"
@@ -193,3 +194,4 @@ end_program:
 .include "tools/CountCharacters.asm"
 .include "tools/ClearClientData.asm"
 .include "tools/ClearBuffer.asm"
+.include "tools/CalculaDigitoID.asm"

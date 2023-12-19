@@ -2,12 +2,10 @@
 result_buffer: .space 32  # Buffer para armazenar os resultados
 
 .text
-.globl FindData
+.globl FindData #encontrar dados no banco
 FindData:
 subi $sp, $sp, -4# necessário , pois quando uma função chama outra o registrador $ra é sobrescrito e perde o retorno original
-sw $ra, 0($sp) #-4 é apenas uma convenção
-
-			
+sw $ra, 0($sp) #-4 é apenas uma convenção			
 		
 	move $s0, $a0 #armazena o dado para comparação
 	la $s1, clientData #armazena o banco de dados para percorrer		 	
@@ -45,7 +43,7 @@ sw $ra, 0($sp) #-4 é apenas uma convenção
 		li $a1, 32
 		jal ClearBuffer	
 		move $t0, $t4
-		addi $s1, $s1, 1 
+		addi $s1, $s1, 1 #salva uma casa para ignorar o ultimo '0' ou ';'
 		j find_comp_data_loop_start
 		
 end_find_data:

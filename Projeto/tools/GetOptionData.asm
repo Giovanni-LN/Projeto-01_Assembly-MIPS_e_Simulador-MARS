@@ -1,5 +1,5 @@
 .text
-.globl GetOptionData
+.globl GetOptionData #option são os dados por exmeplo em conta_cadastro eles são cpf, numero, nome
 GetOptionData:
     la $a0, data_buffer
 load_option_1:

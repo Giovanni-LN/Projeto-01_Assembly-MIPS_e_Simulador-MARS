@@ -1,7 +1,7 @@
 .text
 .globl CalculaDigitoID
-CalculaDigitoID:
-# Suponha que option_2 contenha a string "123456"
+CalculaDigitoID: #calcula qual será o ditigo de verificação
+
 la $s0, option_2     # Endereço da string
 li $t0, 0  # Inicializa o índice do dígito
 li $t3, 2         

@@ -1,6 +1,6 @@
 .text
 .globl GetComand
-GetComand:
+GetComand: #também separa o é comando do que é dado
 	# 1. Leitura da String de Entrada
 	li $v0, 8            # código da syscall para ler string
 	la $a0, buffer       # endereço do buffer

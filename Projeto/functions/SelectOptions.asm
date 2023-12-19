@@ -1,9 +1,9 @@
 .text
-.globl SelectOptions
+.globl SelectOptions #seleciona qual função vai chamar
 SelectOptions:
 	#empilha o valor altual de #$ra
 	subi $sp, $sp, -4# necessário , pois quando uma função chama outra o registrador $ra é sobrescrito e perde o retorno original
-	sw $ra, 0($sp) #-4 é apenas uma convenção, eu li em um fórum
+	sw $ra, 0($sp) #-4 é apenas uma convenção
 	
 	la $a1 , cmd_buffer #vai ser passado como parametro para strcmp	
 	la $a0, cmd1 #segundo parametro para strcmp

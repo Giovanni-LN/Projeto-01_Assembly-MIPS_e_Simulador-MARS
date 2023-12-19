@@ -15,9 +15,8 @@ sw $ra, 0($sp) #-4 é apenas uma convenção, eu li em um fórum
 
 	# Inserir o caractere no início
 	#sb $t1, 0($t0)
-	
+		
 	jal CalculaDigitoID
-	
 	la $a0, salve_data_buffer
 	la $a1, option_1
 	jal strcat
@@ -61,6 +60,7 @@ sw $ra, 0($sp) #-4 é apenas uma convenção, eu li em um fórum
 	la $a0, clientData
 	la $a1, salve_data_buffer
 	jal strcat
+
 	
 lw $ra, 0($sp)
 addi $sp, $sp, 4 

@@ -3,6 +3,8 @@
 	mensagem_invalido: .asciiz "Comando inválido"
 	
 	msg_sonho: .asciiz "Funciona!!"
+	cpf_ja_cadastrado: .asciiz "CPF já cadastrado\n"
+	id_ja_cadastrado: .asciiz "ID já cadastrado\n"
 	
 	cmd_buffer: .space 32	
 	option_1: .space 32
@@ -57,6 +59,10 @@
 	
 #opções
 	conta_cadastrar:
+		la $a0, option_1
+		jal FindData
+		beqz $v0, cpf_repetido	
+					
 		jal Cadastro
 		j update_loop
 				
@@ -171,7 +177,20 @@ update_loop:
 	li $a1, 128	
 	jal ClearBuffer
 j main_loop
- 		      		
+
+
+cpf_repetido:
+	li $v0, 4
+	la $a0, cpf_ja_cadastrado
+	syscall
+	j update_loop
+id_repetido:
+	li $v0, 4
+	la $a0, id_ja_cadastrado
+	syscall
+	j update_loop	 
+	
+	     		     		
 end_program:
     # Finaliza o programa
     li $v0, 10
@@ -195,3 +214,5 @@ end_program:
 .include "tools/ClearClientData.asm"
 .include "tools/ClearBuffer.asm"
 .include "tools/CalculaDigitoID.asm"
+
+.include "FindData.asm"

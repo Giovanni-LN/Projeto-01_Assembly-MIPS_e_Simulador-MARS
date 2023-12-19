@@ -23,9 +23,10 @@ load_digit_loop:
     j load_digit_loop
 
 end_load_digit:
+    li $t4, 11
     # Realiza a operação final
-    div $t2, $t2, 11
-    mflo $t2            # Obtém o inteiro da divisão
+    div $t2, $t4
+    mfhi $t2            # Obtém o inteiro da divisão
     addi $t2, $t2, '0'  # Converte para ASCII
 
     # Concatena o resultado no final da string

@@ -46,11 +46,12 @@
 	
 	newline: .asciiz  "\n"
 	ponto_virgula: .asciiz ";"
+	msg_mensagem_formatar: .asciiz  "Dados Formatados - Reinicialização Necessária!"
 	
 	#OBS: muitos dos dados alocados aqui vão ser usados em outras funções, caso execulte o arquivo contendo a função independentemente provavelmente ela não vai funcionar, sempre execulte o main
 	#Atenção Se o mars.jar não estiver na mesma pasta que o arquivo txt é preciso inserir o caminho completo até chegar nele ex: C:/Users/_SEU-USUARIO_/Desktop/assembly-mars/dados.txt
 	get_localArquivo: .asciiz "data/ClientData.txt"	
-	set_localArquivo: .asciiz "data/ClientData_teste.txt"	
+	set_localArquivo: .asciiz "data/ClientData.txt"	
 	clientData: .space 3200 #sempre coloque no final de .data, isso evita problema de invasão/estouro de memória
 .text
 
@@ -126,6 +127,7 @@
         	jal CountCharacters # conta o numero de caracteres em clientData
         	beqz  $v0 formatar_salvar # se clientData = 0 significa que foi usado o comando formatar
         	jal SetClientData
+        	jal GetClientData
         	j update_loop
         
         recarregar: #"feito" reseta clientData e recarrega os dados
@@ -160,7 +162,10 @@ command_not_found:
 
 formatar_salvar:
 	jal Formatar # a função Formatar apaga todos os dados no arquivo .txt
-	j update_loop
+	li $v0, 4
+	la $a0, msg_mensagem_formatar
+	syscall
+	j end_program
 j main_loop 
  
 update_loop: #update limpa todos os buffers principais para evitar problema quando iniciar o loop

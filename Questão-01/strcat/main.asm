@@ -1,3 +1,9 @@
+# Grupo : Giovanni Lima, Caio Fontes e Raphael Barbosa
+# Atividade 1°VA - Projeto 01 - Assembly MIPS e Simulador MARS
+# Arquitetura e Organização de Computadores 2023.1
+# 1° Questão - Requisito "e"
+# Arquivo main da função strcat
+
 # main.asm
 
 .data

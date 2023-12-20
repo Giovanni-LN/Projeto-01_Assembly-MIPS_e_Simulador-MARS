@@ -1,3 +1,9 @@
+# Grupo : Giovanni Lima, Caio Fontes e Raphael Barbosa
+# Atividade 1°VA - Projeto 01 - Assembly MIPS e Simulador MARS
+# Arquitetura e Organização de Computadores 2023.1
+# 2° Questão
+# Arquivo main para utiçização do mecanismo memory-mapped Input/Output (MMIO)
+
 .data
 buffer: .space 1        # Espaço para armazenar o caractere lido
 

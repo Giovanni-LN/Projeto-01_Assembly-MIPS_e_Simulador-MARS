@@ -1,3 +1,9 @@
+# Grupo : Giovanni Lima, Caio Fontes e Raphael Barbosa
+# Atividade 1°VA - Projeto 01 - Assembly MIPS e Simulador MARS
+# Arquitetura e Organização de Computadores 2023.1
+# Projeto
+# Arquivo main onde é executado todas as funcionalidades do programa
+
 .data
 	buffer: .space 128    # buffer para armazenar a string de entrada	
 	mensagem_invalido: .asciiz "Comando inválido"
